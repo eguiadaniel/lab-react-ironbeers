@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { listBeers } from './../services/beer-api';
+import { singleBeer } from './../services/beer-api';
 
 class SingleBeer extends Component {
   state = {
@@ -11,10 +12,9 @@ class SingleBeer extends Component {
   }
 
   async loadBeer() {
-    const beers = await listBeers();
     const id = this.props.match.params.id;
+    const beer = await singleBeer(id);
 
-    const beer = beers.find((beer) => beer._id === id);
     if (beer) {
       this.setState({
         beer: beer,
@@ -22,6 +22,15 @@ class SingleBeer extends Component {
     } else {
       this.props.history.push(`/error?originalUrl=${this.props.match.url}`);
     }
+
+    // const beer = beers.find((beer) => beer._id === id);
+    // if (beer) {
+    //   this.setState({
+    //     beer: beer,
+    //   });
+    // } else {
+    //   this.props.history.push(`/error?originalUrl=${this.props.match.url}`);
+    // }
 
     console.log(this.state.beers);
   }

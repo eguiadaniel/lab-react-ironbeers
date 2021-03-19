@@ -5,3 +5,10 @@ export const listBeers = async () => {
   // const body = response.data;
   return response.data;
 };
+
+
+export const singleBeer = async (id) => {
+  const url = 'https://ih-beers-api2.herokuapp.com/beers/' + id
+  const response = await axios.get(url)
+  return response.data
+}
