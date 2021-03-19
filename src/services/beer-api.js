@@ -12,3 +12,9 @@ export const singleBeer = async (id) => {
   const response = await axios.get(url)
   return response.data
 }
+
+export const randomBeer = async () => {
+  const url = 'https://ih-beers-api2.herokuapp.com/beers/random'
+  const response = await axios.get(url)
+  return response.data
+}

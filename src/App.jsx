@@ -9,6 +9,7 @@ import NewBeer from './views/NewBeer';
 import Home from './views/Home';
 
 function App() {
+  const random = true;
   return (
     <div className="App">
       <BrowserRouter>
@@ -18,7 +19,13 @@ function App() {
           <Route path="/" component={Home} exact />
           <Route path="/beers" component={BeerList} exact />
           <Route path="/beer/:id" component={SingleBeer} exact />
-          <Route path="/random-beer" component={SingleBeer} exact />
+          <Route 
+          path="/random-beer" 
+          render={(props) => (
+          <SingleBeer {...props} random={random}/>            
+          )}
+          exact
+          />  
           <Route path="/new-beer" component={NewBeer} exact />
         </Switch>
       </BrowserRouter>

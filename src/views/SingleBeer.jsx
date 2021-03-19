@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { listBeers } from './../services/beer-api';
 import { singleBeer } from './../services/beer-api';
+import { randomBeer } from './../services/beer-api';
 
 class SingleBeer extends Component {
   state = {
     beer: '',
+    randomBeer:'' 
   };
 
   componentDidMount() {
-    this.loadBeer();
+    if (this.props.random) {
+      this.loadRandomBeer();
+    } else {
+      this.loadBeer();
+    }
   }
 
   async loadBeer() {
@@ -21,20 +27,17 @@ class SingleBeer extends Component {
       });
     } else {
       this.props.history.push(`/error?originalUrl=${this.props.match.url}`);
-    }
-
-    // const beer = beers.find((beer) => beer._id === id);
-    // if (beer) {
-    //   this.setState({
-    //     beer: beer,
-    //   });
-    // } else {
-    //   this.props.history.push(`/error?originalUrl=${this.props.match.url}`);
-    // }
-
-    console.log(this.state.beers);
+    }          
+          console.log(this.state.beers);
   }
-
+        
+  async loadRandomBeer() {
+      const beer = await randomBeer(); 
+      this.setState({
+      beer: beer,
+    });
+    }
+    
   render() {
     const beer = this.state.beer;
     return (
